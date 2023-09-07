@@ -1,22 +1,53 @@
 package com.wearesho.pluginseon;
 
+import android.Manifest;
+
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
+import com.getcapacitor.annotation.Permission;
 
-@CapacitorPlugin(name = "PluginSeon")
+import io.seon.androidsdk.service.Seon;
+import io.seon.androidsdk.service.SeonBuilder;
+
+@CapacitorPlugin(name = "PluginSeon", permissions = {
+        @Permission(
+                strings = {
+                        Manifest.permission.INTERNET,
+                        Manifest.permission.READ_PHONE_STATE,
+                        Manifest.permission.ACCESS_WIFI_STATE,
+                        Manifest.permission.ACCESS_NETWORK_STATE,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                }
+        ),
+})
 public class PluginSeonPlugin extends Plugin {
-
-    private PluginSeon implementation = new PluginSeon();
-
     @PluginMethod
-    public void echo(PluginCall call) {
-        String value = call.getString("value");
+    public void getFingerprintBase64(PluginCall call) {
+//        final String SESSION_ID = "CUSTOM_SESSION_ID";
+        String SESSION_ID = call.getString("sessionId", "");
 
-        JSObject ret = new JSObject();
-        ret.put("value", implementation.echo(value));
-        call.resolve(ret);
+        try {
+            // Build with parameters
+            Seon seonFingerprint = new SeonBuilder()
+                    .withContext(this.getActivity().getApplicationContext())
+                    .withSessionId(SESSION_ID)
+                    .build();
+
+            // Enable logging
+            seonFingerprint.setLoggingEnabled(true);
+
+            seonFingerprint.getFingerprintBase64(fp -> {
+                //set fp as the value for the session property of the fraud API request.
+                JSObject result = new JSObject();
+                result.put("fp", fp);
+                call.resolve(result);
+            });
+        } catch (Throwable ex) {
+            call.reject("An unexpected error occurred: " + ex.getMessage());
+        }
     }
 }

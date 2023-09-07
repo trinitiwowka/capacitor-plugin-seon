@@ -1,3 +1,8 @@
 export interface PluginSeonPlugin {
-  echo(options: { value: string }): Promise<{ value: string }>;
+    /**
+     * Get fingerprint in Base64 format.
+     */
+    getFingerprintBase64(options: {
+        sessionId: string
+    }): Promise<{ value: string }>;
 }
