@@ -27,7 +27,6 @@ import io.seon.androidsdk.service.SeonBuilder;
 public class PluginSeonPlugin extends Plugin {
     @PluginMethod
     public void getFingerprintBase64(PluginCall call) {
-//        final String SESSION_ID = "CUSTOM_SESSION_ID";
         String SESSION_ID = call.getString("sessionId", "");
 
         try {
@@ -38,7 +37,7 @@ public class PluginSeonPlugin extends Plugin {
                     .build();
 
             // Enable logging
-            seonFingerprint.setLoggingEnabled(true);
+            // seonFingerprint.setLoggingEnabled(true);
 
             seonFingerprint.getFingerprintBase64(fp -> {
                 //set fp as the value for the session property of the fraud API request.

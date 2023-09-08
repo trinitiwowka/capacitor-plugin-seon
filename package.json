@@ -1,6 +1,6 @@
 {
   "name": "capacitor-plugin-seon",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Capacitor plugin for https://github.com/seontechnologies/seon-android-sdk-public",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
