@@ -4,5 +4,5 @@ export interface PluginSeonPlugin {
      */
     getFingerprintBase64(options: {
         sessionId: string
-    }): Promise<{ value: string }>;
+    }): Promise<{ fp: string }>;
 }

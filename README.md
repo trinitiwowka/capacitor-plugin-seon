@@ -23,7 +23,7 @@ npx cap sync
 ### getFingerprintBase64(...)
 
 ```typescript
-getFingerprintBase64(options: { sessionId: string; }) => Promise<{ value: string; }>
+getFingerprintBase64(options: { sessionId: string; }) => Promise<{ fp: string; }>
 ```
 
 Get fingerprint in Base64 format.
@@ -32,7 +32,7 @@ Get fingerprint in Base64 format.
 | ------------- | ----------------------------------- |
 | **`options`** | <code>{ sessionId: string; }</code> |
 
-**Returns:** <code>Promise&lt;{ value: string; }&gt;</code>
+**Returns:** <code>Promise&lt;{ fp: string; }&gt;</code>
 
 --------------------
 

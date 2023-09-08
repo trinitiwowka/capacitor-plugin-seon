@@ -6,7 +6,7 @@ export class PluginSeonWeb extends WebPlugin implements PluginSeonPlugin {
   getFingerprintBase64(options: {
     sessionId: string
   }): Promise<{
-    value: string;
+    fp: string;
   }> {
     console.log({sessionId: options.sessionId})
     throw this.unimplemented('Not implemented on web.');
